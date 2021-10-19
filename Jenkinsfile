@@ -42,15 +42,16 @@ pipeline {
               message "Select the environment to deploy..."
               ok "Done"
               parameters {
-                choice(name: 'ENV1', choices: ['dev', 'staging', 'prod'], description: '')
+                // choice(name: 'ENV1', choices: ['dev', 'staging', 'prod'], description: '')
                 choice(name: 'ENV2', choices: ['dev', 'staging', 'prod'], description: '')
               }
             }
             steps {
                 script {
+                    env.MYENV input message:"Select the environment to deploy...", ok "Done", parameters: [choice(name: 'ENV1', choices: ['dev', 'staging', 'prod'], description: '')]
                     gv.deployApp()
-                    echo "${ENV1} is selected. Please wait..."
-                    echo "${ENV2} is selected. Please wait..."
+                    echo "MYENV: ${MYENV} is selected"
+                    echo "ENV2: ${ENV2} is selected"
                     echo "Done"
                 }
             }
