@@ -34,7 +34,7 @@ pipeline {
             }
             steps {
                 script {
-                    echo "Testing the application..."
+                    echo "Testing the application with webhook trigger..."
                     // gv.buildJar()
                 }
             }
