@@ -18,22 +18,41 @@ pipeline {
                 }
             }
         }
-        stage('build jar') {
-            steps {
-                script {
-                    gv.buildJar()
-                }
-            }
-        }
         stage('build image') {
             steps {
                 script {
-                    gv.buildImage()
+                    echo "Testing the application..."
+                    echo "Executing pipeline for branch $BRANCH_NAME"
                 }
             }
         }
+        stage('build jar') {
+            when {
+              expression {
+                BRANCH_NAME == 'main'
+              }
+            }
+            steps {
+                script {
+                    echo "Testing the application..."
+                    // gv.buildJar()
+                }
+            }
+        }
+        // stage('build image') {
+        //     steps {
+        //         script {
+        //             gv.buildImage()
+        //         }
+        //     }
+        // }
 
         stage('deploy') {
+          when {
+              expression {
+                BRANCH_NAME == 'main'
+              }
+            }
             steps {
                 script {
                     gv.deployApp()
