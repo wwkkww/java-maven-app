@@ -55,7 +55,8 @@ pipeline {
             }
             steps {
                 script {
-                    gv.deployApp()
+                    echo "Testing the application with webhook trigger..."
+                    // gv.deployApp()
                 }
             }
         }
