@@ -48,7 +48,7 @@ pipeline {
             }
             steps {
                 script {
-                    env.MYENV input message:"Select the environment to deploy...", ok "Done", parameters: [choice(name: 'ENV1', choices: ['dev', 'staging', 'prod'], description: '')]
+                    env.MYENV = input message: "Select the environment to deploy...", ok "Done", parameters: [choice(name: 'ENV1', choices: ['dev', 'staging', 'prod'], description: '')]
                     gv.deployApp()
                     echo "MYENV: ${MYENV} is selected"
                     echo "ENV2: ${ENV2} is selected"
